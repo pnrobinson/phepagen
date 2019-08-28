@@ -32,6 +32,10 @@ public class Csv2Phenopacket {
             e.printStackTrace();
         }
         String command = jc.getParsedCommand();
+        if (command == null) {
+            System.err.println("[ERROR] No command passed");
+            return;
+        }
         Csv2PpCommand csvcommand=null;
         switch (command) {
             case "id":
