@@ -1,57 +1,33 @@
 package org.monarchinitiative.csv2pp;
 
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.ParameterException;
+
 import org.monarchinitiative.csv2pp.cmd.Csv2PhenopacketCommand;
-import org.monarchinitiative.csv2pp.cmd.Csv2PpCommand;
 import org.monarchinitiative.csv2pp.cmd.IdCommand;
 import org.monarchinitiative.csv2pp.cmd.ParseCsvCommand;
+import picocli.CommandLine;
 
-public class Csv2Phenopacket {
-    @Parameter(names = {"-h", "--help"}, help = true, arity = 0,description = "display this help message")
-    private boolean usageHelpRequested;
+import java.util.concurrent.Callable;
+
+public class Csv2Phenopacket implements Callable<Integer>  {
+
 
     public static void main(String [] args){
-        Csv2Phenopacket csv = new Csv2Phenopacket();
-        IdCommand id = new IdCommand();
-        ParseCsvCommand pcsv = new ParseCsvCommand();
-        Csv2PhenopacketCommand c2p = new Csv2PhenopacketCommand();
-
-        JCommander jc = JCommander.newBuilder()
-                .addObject(csv)
-                .addCommand("id", id)
-                .addCommand("csv",pcsv)
-                .addCommand("c2p",c2p)
-                .build();
-        jc.setProgramName("java -jar csv2pp.jar");
-
-        try {
-            jc.parse(args);
-        } catch (ParameterException e) {
-            e.printStackTrace();
+        if (args.length == 0) {
+            // if the user doesn't pass any command or option, add -h to show help
+            args = new String[]{"-h"};
         }
-        String command = jc.getParsedCommand();
-        if (command == null) {
-            System.err.println("[ERROR] No command passed");
-            return;
-        }
-        Csv2PpCommand csvcommand=null;
-        switch (command) {
-            case "id":
-                csvcommand = id;
-                break;
-            case "csv":
-                csvcommand = pcsv;
-                break;
-            case "c2p":
-                csvcommand = c2p;
-                break;
-        }
-        csvcommand.run();
+        CommandLine cline = new CommandLine(new Csv2Phenopacket())
+                .addSubcommand("download", new Csv2PhenopacketCommand())
+                .addSubcommand("hbadeals", new IdCommand())
+                .addSubcommand("interpro", new ParseCsvCommand());
+        cline.setToggleBooleanFlags(false);
+        int exitCode = cline.execute(args);
+        System.exit(exitCode);
     }
 
-
-    public Csv2Phenopacket() {
+    @Override
+    public Integer call() {
+        // work done in subcommands
+        return 0;
     }
 }

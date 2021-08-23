@@ -1,25 +1,28 @@
 package org.monarchinitiative.csv2pp.cmd;
 
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.Parameters;
+
 import org.monarchinitiative.phenol.io.OntologyLoader;
 import org.monarchinitiative.phenol.ontology.data.Ontology;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenol.ontology.data.TermId;
+import picocli.CommandLine;
 
 import java.io.File;
+import java.util.concurrent.Callable;
 
-@Parameters(commandDescription = "translate HPO terms")
-public class IdCommand extends Csv2PpCommand {
-    @Parameter(names={"-h","--hpo"}, description = "path to hp.obo", required = true)
+@CommandLine.Command(name = "translate to phenopacket", aliases = {"I"},
+        mixinStandardHelpOptions = true,
+        description = "Download files for prositometry")
+public class IdCommand implements Callable<Integer> {
+    @CommandLine.Option(names={"-h","--hpo"}, description = "path to hp.obo", required = true)
     private String hpopath;
-    @Parameter(names={"-t","--terms"}, description = "list of HPO term ids", required = true)
+    @CommandLine.Option(names={"-t","--terms"}, description = "list of HPO term ids", required = true)
     private String terms;
 
     public  IdCommand(){}
 
     @Override
-    public void run() {
+    public Integer call() {
         Ontology ontology = OntologyLoader.loadOntology(new File(hpopath));
         String [] termlist = terms.split(",");
         for (String t : termlist) {
@@ -27,5 +30,6 @@ public class IdCommand extends Csv2PpCommand {
             Term term = ontology.getTermMap().get(tid);
             System.out.println(term.getName() +"\t" + tid.getValue());
         }
+        return 0;
     }
 }

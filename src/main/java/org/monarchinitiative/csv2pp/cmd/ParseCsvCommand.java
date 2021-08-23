@@ -1,20 +1,23 @@
 package org.monarchinitiative.csv2pp.cmd;
 
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.Parameters;
+
 import org.monarchinitiative.phenol.io.OntologyLoader;
 import org.monarchinitiative.phenol.ontology.data.Ontology;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenol.ontology.data.TermId;
+import picocli.CommandLine;
 
 import java.io.*;
+import java.util.concurrent.Callable;
 
-@Parameters(commandDescription = "translate HPO terms")
-public class ParseCsvCommand extends Csv2PpCommand{
-    @Parameter(names={"-h","--hpo"}, description = "path to hp.obo", required = true)
+@CommandLine.Command(name = "translate to phenopacket", aliases = {"P"},
+        mixinStandardHelpOptions = true,
+        description = "Download files for prositometry")
+public class ParseCsvCommand implements Callable<Integer> {
+    @CommandLine.Option(names={"-h","--hpo"}, description = "path to hp.obo", required = true)
     private String hpopath;
 
-    @Parameter(names={"-c","--csv"}, description = "path to csv file", required = true)
+    @CommandLine.Option(names={"-c","--csv"}, description = "path to csv file", required = true)
     private String csvpath;
 
 
@@ -26,8 +29,10 @@ public class ParseCsvCommand extends Csv2PpCommand{
 
 
     private void outputHpo(Writer writer, String field, int i) throws IOException {
-        String [] termlist = field.split(",");
+        String [] termlist = field.split("[,\\s]");
         for (String t : termlist) {
+            if (t.isEmpty()) continue;
+            System.out.printf("%s\n",t);
             TermId tid = TermId.of(t.trim());
             Term term = ontology.getTermMap().get(tid);
             if (term == null) {
@@ -58,7 +63,7 @@ public class ParseCsvCommand extends Csv2PpCommand{
 
 
     @Override
-    public void run() {
+    public Integer call() {
         ontology = OntologyLoader.loadOntology(new File(hpopath));
         try {
             BufferedReader br = new BufferedReader(new FileReader(csvpath));
@@ -75,5 +80,6 @@ public class ParseCsvCommand extends Csv2PpCommand{
         } catch (IOException e){
             e.printStackTrace();
         }
+        return 0;
     }
 }
