@@ -1,4 +1,4 @@
-package org.monarchinitiative.csv2pp.analysis;
+package org.monarchinitiative.phenogen.analysis;
 
 public class Csv2Phenopacket {
 
