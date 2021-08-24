@@ -19,7 +19,7 @@ public class RareDiseaseMCAHS1 {
     private static final Evidence authorAssertion = evidenceWithEcoAuthorStatement(PMID, publication);
 
     /** version 2 phenopacket for the disease MCAHS1 */
-    Phenopacket phenopacket;
+    final Phenopacket phenopacket;
 
     private RareDiseaseMCAHS1() {
         ExternalReference citation = ExternalReferenceUtil.externalReference(PMID, publication);

@@ -1,7 +1,6 @@
 package org.monarchinitiative.phenogen.phenopacket.buildingblocks;
 
 import com.google.protobuf.Timestamp;
-import org.phenopackets.schema.v2.core.Evidence;
 import org.phenopackets.schema.v2.core.ExternalReference;
 import org.phenopackets.schema.v2.core.MetaData;
 import org.phenopackets.schema.v2.core.Resource;

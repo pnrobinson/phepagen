@@ -5,7 +5,7 @@ import org.monarchinitiative.phenol.ontology.data.TermId;
 import org.phenopackets.schema.v2.core.Disease;
 import org.phenopackets.schema.v2.core.OntologyClass;
 
-public class DiseaseBuilder {
+public class DiseaseUtil {
 
 
 

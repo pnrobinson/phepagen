@@ -1,10 +1,8 @@
 package org.monarchinitiative.phenogen.phenopacket.buildingblocks;
 
 import org.ga4gh.vrsatile.v1.GeneDescriptor;
-import org.monarchinitiative.phenol.ontology.data.TermId;
-import org.phenopackets.schema.v2.core.OntologyClass;
 
-public class GeneDescriptorBuilder {
+public class GeneDescriptorUtil {
 
 
     private static GeneDescriptor factory(String geneSymbol, String valueId) {
