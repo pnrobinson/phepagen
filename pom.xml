@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.monarchinitiative</groupId>
-    <artifactId>phenogen</artifactId>
-    <version>0.1.1</version>
+    <artifactId>phepagen</artifactId>
+    <version>0.1.2</version>
     <packaging>jar</packaging>
 
     <name>phenogen</name>
@@ -225,36 +225,15 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.12.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>30.1.1-jre</version>
-        </dependency>
+
     </dependencies>
     <build>
-        <finalName>pheno-obfuscator</finalName>
+        <finalName>phepagen</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources/template</directory>
-            </resource>
-            <resource>
-                <directory>src/test/resources/yaml</directory>
-            </resource>
-            <resource>
-                <directory>src/test/resources/phenopacket</directory>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.yml</include>
-                    <include>**/*.ftl</include>
-                </includes>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
@@ -297,7 +276,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>org.monarchinitiative.phenogen.PhenoGen</mainClass>
+                            <mainClass>org.monarchinitiative.phenogen.Main</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
@@ -324,8 +303,9 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -396,7 +376,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.monarchinitiative.phenogen.PhenoGen</mainClass>
+                                    <mainClass>org.monarchinitiative.phenogen.Main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -2,9 +2,7 @@ package org.monarchinitiative.phenogen.phenopacket.buildingblocks;
 
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.Timestamps;
-import org.ga4gh.vrsatile.v1.Expression;
 import org.ga4gh.vrsatile.v1.GeneDescriptor;
-import org.ga4gh.vrsatile.v1.VariationDescriptor;
 import org.phenopackets.schema.v2.core.*;
 
 import java.text.ParseException;
@@ -265,29 +263,6 @@ public class PhenopacketUtil {
                 .build() ;
     }
 
-    public static VariationDescriptor heterozygousHgvsVariant(String hgvs) {
-        OntologyClass heterozygous = ontologyClass("GENO:0000135", "heterozygous");
-        return VariationDescriptor.newBuilder()
-                .addExpressions(Expression.newBuilder().setSyntax("hgvs").setValue(hgvs))
-                .setAllelicState(heterozygous)
-                .build();
-    }
-
-    public static VariantInterpretation pathogenicVariantInterpretation(VariationDescriptor variationDescriptor) {
-        return VariantInterpretation.newBuilder()
-                .setAcmgPathogenicityClassification(AcmgPathogenicityClassification.PATHOGENIC)
-                .setVariationDescriptor(variationDescriptor).build();
-    }
-
-    public static GenomicInterpretation pathogenicGenomicInterpretationOfVariant(String id, String hgvs) {
-        VariationDescriptor variationDescriptor = heterozygousHgvsVariant(hgvs);
-        VariantInterpretation variantInterpretation = pathogenicVariantInterpretation(variationDescriptor);
-        return GenomicInterpretation.newBuilder()
-                .setSubjectOrBiosampleId(id)
-                .setVariantInterpretation(variantInterpretation)
-                .setInterpretationStatus(GenomicInterpretation.InterpretationStatus.CONTRIBUTORY)
-                .build();
-    }
 
 
     public static Disease diseaseWithOnset(OntologyClass diseaseTerm, String onset) {

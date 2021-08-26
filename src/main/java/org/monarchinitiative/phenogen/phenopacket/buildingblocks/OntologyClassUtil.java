@@ -10,6 +10,13 @@ public class OntologyClassUtil {
         return OntologyClass.newBuilder().setId(tid.getValue()).setLabel(label).build();
     }
 
+    public static OntologyClass factory(String termId, String label) {
+        TermId tid = TermId.of(termId);
+        return OntologyClass.newBuilder().setId(tid.getValue()).setLabel(label).build();
+    }
+
+    public final static OntologyClass heterozygous = factory("GENO:0000135", "heterozygous");
+
     public static OntologyClass ventricularSeptalDefect() {
         TermId tid = TermId.of("HP:0001629");
         String label = "Ventricular septal defect";
