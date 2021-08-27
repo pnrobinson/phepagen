@@ -4,6 +4,7 @@ package org.monarchinitiative.phenogen.cmd;
 import com.google.protobuf.util.JsonFormat;
 import org.monarchinitiative.phenogen.except.PhenogenRuntimeException;
 import org.monarchinitiative.phenogen.phenopacket.RareDiseaseMCAHS1;
+import org.monarchinitiative.phenogen.phenopacket.RareDiseaseThrombocytopenia2;
 import org.phenopackets.schema.v2.Phenopacket;
 import picocli.CommandLine;
 
@@ -30,6 +31,8 @@ public class PhenoGenCommand implements Callable<Integer> {
     private void outputRareDiseaseExamples() {
         Phenopacket mcahs1 = RareDiseaseMCAHS1.phenopacket();
         outputPhenopacket("mcahs1.json", mcahs1);
+        Phenopacket thrombocytopenia2 = RareDiseaseThrombocytopenia2.phenopacket();
+        outputPhenopacket("thrombocytopenia2.json", thrombocytopenia2);
     }
 
 
