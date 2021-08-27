@@ -25,6 +25,7 @@ public class PhenoGenCommand implements Callable<Integer> {
         createOutdirectoryIfNeeded();
         outputRareDiseaseExamples();
         outputCancerExamples();
+        outputCommonDisease();
         return 0;
     }
 
@@ -40,6 +41,13 @@ public class PhenoGenCommand implements Callable<Integer> {
         outputPhenopacket("aml.json", aml.phenopacket());
         PhenopacketFactory scc = new CancerSquamousCell();
         outputPhenopacket("squamousCellCarcinoma.json", aml.phenopacket());
+        PhenopacketFactory urothelial = new CancerUrothelial();
+        outputPhenopacket("urothelial.json", aml.phenopacket());
+    }
+
+    private void outputCommonDisease() {
+        PhenopacketFactory covid = new CovidExample();
+        outputPhenopacket("covid19.json", covid.phenopacket());
     }
 
 
