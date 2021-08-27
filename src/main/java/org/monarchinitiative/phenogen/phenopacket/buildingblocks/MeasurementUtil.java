@@ -11,9 +11,9 @@ public class MeasurementUtil {
 
 
     private static final OntologyClass loincPlatelets =
-            OntologyClassUtil.factory("LOINC:26515-7","Platelets [#/volume] in Blood");
+            OntologyClassUtil.ontologyClassFactory("LOINC:26515-7","Platelets [#/volume] in Blood");
     private static final OntologyClass cellsPerMicroliter =
-            OntologyClassUtil.factory("UO:0000316", "cells per microliter");
+            OntologyClassUtil.ontologyClassFactory("UO:0000316", "cells per microliter");
     private static final ReferenceRange plateletsRange =
             ReferenceRange.newBuilder().setUnit(loincPlatelets).setLow(150000.0).setHigh(450000.0).build();
     private final static LocalDateTime dateIn2020 = LocalDate.of(2020, 10, 01).atTime(10, 54, 02);

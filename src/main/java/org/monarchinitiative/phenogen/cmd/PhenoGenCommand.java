@@ -3,6 +3,8 @@ package org.monarchinitiative.phenogen.cmd;
 
 import com.google.protobuf.util.JsonFormat;
 import org.monarchinitiative.phenogen.except.PhenogenRuntimeException;
+import org.monarchinitiative.phenogen.phenopacket.CancerAML;
+import org.monarchinitiative.phenogen.phenopacket.PhenopacketFactory;
 import org.monarchinitiative.phenogen.phenopacket.RareDiseaseMCAHS1;
 import org.monarchinitiative.phenogen.phenopacket.RareDiseaseThrombocytopenia2;
 import org.phenopackets.schema.v2.Phenopacket;
@@ -25,14 +27,20 @@ public class PhenoGenCommand implements Callable<Integer> {
     public Integer call() {
         createOutdirectoryIfNeeded();
         outputRareDiseaseExamples();
+        outputCancerExamples();
         return 0;
     }
 
     private void outputRareDiseaseExamples() {
-        Phenopacket mcahs1 = RareDiseaseMCAHS1.phenopacket();
-        outputPhenopacket("mcahs1.json", mcahs1);
-        Phenopacket thrombocytopenia2 = RareDiseaseThrombocytopenia2.phenopacket();
-        outputPhenopacket("thrombocytopenia2.json", thrombocytopenia2);
+        PhenopacketFactory mcahs1 = new RareDiseaseMCAHS1();
+        outputPhenopacket("mcahs1.json", mcahs1.phenopacket());
+        PhenopacketFactory thrombocytopenia2 = new RareDiseaseThrombocytopenia2();
+        outputPhenopacket("thrombocytopenia2.json", thrombocytopenia2.phenopacket());
+    }
+
+    private void outputCancerExamples() {
+        PhenopacketFactory aml = new CancerAML();
+        outputPhenopacket("aml.json", aml.phenopacket());
     }
 
 

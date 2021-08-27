@@ -12,7 +12,7 @@ public class DiseaseUtil {
     public static Disease mcahs1() {
         TermId tid = TermId.of("OMIM:614080");
         String label = "Multiple Congenital Anomalies-hypotonia-seizures Syndrome 1";
-        OntologyClass clz = OntologyClassUtil.factory(tid, label);
+        OntologyClass clz = OntologyClassUtil.ontologyClassFactory(tid, label);
         return Disease.newBuilder().setTerm(clz).build();
     }
 
