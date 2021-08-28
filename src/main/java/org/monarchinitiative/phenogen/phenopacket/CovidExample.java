@@ -290,30 +290,6 @@ public class CovidExample extends PhenopacketFactory {
     }
 
 
-    private static Quantity quantityOf(double value, OntologyClass unit) {
-        return Quantity.newBuilder().setUnit(unit).setValue(value).build();
-    }
 
-    private static TimeInterval parseLocalDateInterval(String isoLocalDateStart, String isoLocalDateEnd) {
-        return TimeInterval.newBuilder().setStart(parseIsoLocalDate(isoLocalDateStart)).setEnd(parseIsoLocalDate(isoLocalDateEnd)).build();
-    }
-    private static TimeElement parseLocalDateRange(String isoLocalDateStart, String isoLocalDateEnd) {
-        return TimeElement.newBuilder()
-                .setInterval(parseLocalDateInterval(isoLocalDateStart, isoLocalDateEnd))
-                .build();
-    }
-
-    private static Timestamp parseIsoLocalDate(String isoLocalDate) {
-        return timestampFrom(LocalDate.parse(isoLocalDate));
-    }
-
-    private static Timestamp timestampFrom(LocalDate localDateStart) {
-        return Timestamp.newBuilder().setSeconds(localDateStart.atStartOfDay().toEpochSecond(ZoneOffset.UTC)).build();
-    }
-    private static TimeElement parseLocalDate(String isoLocalDate) {
-        return TimeElement.newBuilder()
-                .setTimestamp(parseIsoLocalDate(isoLocalDate))
-                .build();
-    }
 
 }

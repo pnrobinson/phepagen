@@ -34,6 +34,8 @@ public class PhenoGenCommand implements Callable<Integer> {
         outputPhenopacket("mcahs1.json", mcahs1.phenopacket());
         PhenopacketFactory thrombocytopenia2 = new RareDiseaseThrombocytopenia2();
         outputPhenopacket("thrombocytopenia2.json", thrombocytopenia2.phenopacket());
+        PhenopacketFactory marfan = new RareDiseaseMarfanLosartan();
+        outputPhenopacket("marfan.json", marfan.phenopacket());
     }
 
     private void outputCancerExamples() {
