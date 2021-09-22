@@ -123,10 +123,12 @@ public class CovidExample extends PhenopacketFactory {
                         .addDoseIntervals(DoseInterval.newBuilder()
                                 .setInterval(parseLocalDateInterval("2020-03-20", "2020-03-22"))
                                 .setQuantity(quantityOf(2, ontologyClass("NCIT:C67388", "Liter per Minute")))
+                                .setScheduleFrequency(ontologyClass("PATO:0000689", "continuous"))
                                 .build())
                         .addDoseIntervals(DoseInterval.newBuilder()
                                 .setInterval(parseLocalDateInterval("2020-03-22", "2020-03-23"))
                                 .setQuantity(quantityOf(50, ontologyClass("NCIT:C67388", "Liter per Minute")))
+                                .setScheduleFrequency(ontologyClass("PATO:0000689", "continuous"))
                                 .build()))
                 .build();
 
@@ -163,6 +165,7 @@ public class CovidExample extends PhenopacketFactory {
                         .addDoseIntervals(DoseInterval.newBuilder()
                                 .setInterval(parseLocalDateInterval("2020-03-22", "2020-03-28"))
                                 .setQuantity(quantityOf(14, ontologyClass("NCIT:C91060", "Centimeters of Water")))
+                                .setScheduleFrequency(ontologyClass("PATO:0000689", "continuous"))
                                 .build()))
                 .build();
 
@@ -171,6 +174,8 @@ public class CovidExample extends PhenopacketFactory {
                         .setAgent(ontologyClass("NCIT:C84217", "Tocilizumab"))
                         .addDoseIntervals(DoseInterval.newBuilder()
                                 .setInterval(parseLocalDateInterval("2020-03-24", "2020-03-28"))
+                                .setQuantity(quantityOf(4, ontologyClass("NCIT:C124458","Milligram per Kilogram per Dose")))
+                                .setScheduleFrequency(ontologyClass("NCIT:C64529", "Every Four Weeks"))
                                 .build())
                         .build());
 
